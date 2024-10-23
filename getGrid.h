@@ -1,0 +1,36 @@
+#pragma once
+
+#include <iostream>
+#include <fstream>
+#include <string.h>
+#include <string>
+
+using namespace std;
+
+int getGrid(const string& path, char grid[10][5])
+{
+    ifstream myfile(path);
+
+    if (!myfile.is_open()) {
+        cerr << "Error: Could not open file." << endl;
+        return;
+    }
+
+    string line;
+    int row = 0;
+
+    while (getline(myfile, line) && row < 10) {
+        for (int col = 0; col < 5; col++) {
+            if (line[col] == '0') {
+                grid[row][col] = ' ';
+            }
+            else {
+
+            grid[row][col] = line[col];
+            }
+        }
+        row++;
+    }
+
+    myfile.close();
+}
