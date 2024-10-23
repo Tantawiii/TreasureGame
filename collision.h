@@ -1,16 +1,13 @@
 #pragma once
 #include <iostream>
 
-bool isValidMove(char grid[10][10], int &tempX, int &tempY) {
-    int tempXs = tempX, tempYs = tempY;
-    if (grid[tempX][tempY] == '.') {
-        std::cout << "Collision detected: Wall!" << std::endl;
-        return false;
-    }
-    if (grid[tempX][tempY] == ' ') {
-        grid[tempXs][tempY] = ' ';
-        tempXs = tempX;
-        tempYs = tempY;
-        grid[tempX][tempY] = 'O';
+bool isValidMove(char grid[10][10], int tempX, int tempY) {
+    if(tempX <= 10 || tempY <= 10){
+        if (grid[tempX][tempY] == '.') {
+            return false;
+        }
+        if (grid[tempX][tempY] == ' ') {
+            return true;
+        }
     }
 }

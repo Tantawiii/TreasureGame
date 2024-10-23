@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "collision.h"
+#include "movement.h"
 
 using namespace std;
 
@@ -14,17 +15,25 @@ void initializeGrid() {
 }
 
 int main() {
+
     srand(time(0));
+    
     initializeGrid();
+    
     int playerX = rand() % (gridSize - 2) + 1;
     int playerY = rand() % (gridSize - 2) + 1;
+    while ((playerX == '.' && playerY == '.') || (playerX == '.' && playerY == '.')){
+        playerX = rand() % (gridSize - 2) + 1;
+        playerY = rand() % (gridSize - 2) + 1;
+    }
     border[playerX][playerY] = 'O';
 
-    int targetX, targetY;
-    do {
+    int targetX = rand() % (gridSize - 2) + 1;
+    int targetY = rand() % (gridSize - 2) + 1;
+    while ((targetX == playerX && targetY == playerY) || (targetX == '.' && targetY == '.')) {
         targetX = rand() % (gridSize - 2) + 1;
         targetY = rand() % (gridSize - 2) + 1;
-    } while (targetX == playerX && targetY == playerY);
+    }
     border[targetX][targetY] = 'X';
 
     bool gameOver = false;
@@ -41,6 +50,7 @@ int main() {
             cout << "You Win!\n";
             gameOver = true;
         }
+        handleMovement(border, playerX, playerY);
     }
 
     return 0;

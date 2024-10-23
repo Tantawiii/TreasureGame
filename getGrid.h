@@ -8,7 +8,7 @@ using namespace std;
 
 void getGrid(const string& path, char grid[10][10])
 {
-    ifstream myfile(path);
+    ifstream myfile(path, ios_base::in);
 
     if (!myfile.is_open()) {
         cerr << "Error: Could not open file." << endl;
