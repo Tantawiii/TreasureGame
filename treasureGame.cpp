@@ -46,11 +46,8 @@ int main() {
             }
             cout << endl;
         }
-        if (playerX == targetX && playerY == targetY) {
-            cout << "You Win!\n";
-            gameOver = true;
-        }
-        handleMovement(border, playerX, playerY);
+        handleMovement(border, playerX, playerY,gameOver);
+
     }
 
     return 0;

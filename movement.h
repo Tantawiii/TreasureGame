@@ -2,27 +2,20 @@
 #include "collision.h"
 #include <conio.h>
 
-void handleMovement(char border[10][10], int playerX, int playerY) {
+void handleMovement(char border[10][10], int& playerX, int& playerY, bool& gameOver) {
     if (_kbhit()) {
         char movement = _getch();
         int tempX = playerX, tempY = playerY;
 
-        if (movement == 'w') {
-            tempX--;
+        switch (movement) {
+        case 'w': tempX--; break;
+        case 's': tempX++; break;
+        case 'a': tempY--; break;
+        case 'd': tempY++; break;
+        default: return;
         }
-        else if (movement == 's') {
-            tempX++;
-        }
-        else if (movement == 'a') {
-            tempY--;
-        }
-        else if (movement == 'd') {
-            tempY++;
-        }
-        else {
-            return;
-        }
-        if(isValidMove(border, tempX, tempY)){
+
+        if (isValidMove(border, tempX, tempY,gameOver)) {
             border[playerX][playerY] = ' ';
             playerX = tempX;
             playerY = tempY;
