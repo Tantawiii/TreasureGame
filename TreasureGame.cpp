@@ -22,7 +22,7 @@ int main() {
     
     int playerX = rand() % (gridSize - 2) + 1;
     int playerY = rand() % (gridSize - 2) + 1;
-    while ((playerX == '.' && playerY == '.') || (playerX == '.' && playerY == '.')){
+    while (border[playerX][playerY] == '.') {
         playerX = rand() % (gridSize - 2) + 1;
         playerY = rand() % (gridSize - 2) + 1;
     }
@@ -30,7 +30,7 @@ int main() {
 
     int targetX = rand() % (gridSize - 2) + 1;
     int targetY = rand() % (gridSize - 2) + 1;
-    while ((targetX == playerX && targetY == playerY) || (targetX == '.' && targetY == '.')) {
+    while ((targetX == playerX && targetY == playerY) || border[targetX][targetY] == '.') {
         targetX = rand() % (gridSize - 2) + 1;
         targetY = rand() % (gridSize - 2) + 1;
     }
