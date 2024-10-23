@@ -1,5 +1,4 @@
 #pragma once
-
 #include <iostream>
 #include <fstream>
 #include <string.h>
@@ -30,6 +29,6 @@ void getGrid(const string& path, char grid[10][10])
         }
         row++;
     }
-
+    
     myfile.close();
 }
