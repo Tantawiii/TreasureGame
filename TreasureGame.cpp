@@ -1,37 +1,47 @@
+#include "getGrid.h"
 #include <iostream>
-#include <conio.h>
+#include <cstdlib>
 #include <ctime>
-srand(time(0));
-int playerX = rand() % (grid - 2) + 1, playerY = rand() % (grid - 2) + 1;
-char border[][];
-void Movement() {
-    char movement = _getch();
-    int tempX = playerX, tempY = playerY;
-    if (movement == 'w') {
-        tempX--;
-    }
-    else if (movement == 's') {
-        tempX++;
-    }
-    else if (movement == 'a') {
+#include "collision.h"
 
-        tempY--;
-    }
-    else if (movement == 'd') {
+using namespace std;
 
-        tempY++;
-    }
-    Collision(border[][],tempX, tempY);
+const int gridSize = 10;
+char border[gridSize][gridSize];
+
+void initializeGrid() {
+    getGrid("grid.txt", border);
 }
-void Collision(char border[][],int tempX, int tempY) {
-    if (border[tempX][tempY] != 'H') {
-        border[playerX][playerY] = ' ';
-        playerX = tempX;
-        playerY = tempY;
-        border[playerX][playerY] = 'O';
+
+int main() {
+    srand(time(0));
+    initializeGrid();
+    int playerX = rand() % (gridSize - 2) + 1;
+    int playerY = rand() % (gridSize - 2) + 1;
+    border[playerX][playerY] = 'O';
+
+    int targetX, targetY;
+    do {
+        targetX = rand() % (gridSize - 2) + 1;
+        targetY = rand() % (gridSize - 2) + 1;
+    } while (targetX == playerX && targetY == playerY);
+    border[targetX][targetY] = 'X';
+
+    bool gameOver = false;
+
+    while (!gameOver) {
+        system("cls");
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
+                cout << border[i][j] << ' ';
+            }
+            cout << endl;
+        }
+        if (playerX == targetX && playerY == targetY) {
+            cout << "You Win!\n";
+            gameOver = true;
+        }
     }
-}
-int main()
-{
-    std::cout << "Hello World!\n";
+
+    return 0;
 }
