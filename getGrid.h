@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int getGrid(const string& path, char grid[10][5])
+void getGrid(const string& path, char grid[10][10])
 {
     ifstream myfile(path);
 
@@ -20,12 +20,11 @@ int getGrid(const string& path, char grid[10][5])
     int row = 0;
 
     while (getline(myfile, line) && row < 10) {
-        for (int col = 0; col < 5; col++) {
+        for (int col = 0; col < 10; col++) {
             if (line[col] == '0') {
                 grid[row][col] = ' ';
             }
             else {
-
             grid[row][col] = line[col];
             }
         }
